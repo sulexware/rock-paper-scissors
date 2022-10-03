@@ -2,10 +2,31 @@
 
 // console.log(getComputerChoice());
 
-const playerSelection ='Rock';
-const computerSelection = getComputerChoice();
+let playerSelection;
+const computerSelection = getComputerChoice().toUpperCase();
 
-console.log(playRound(playerSelection.toUpperCase(), computerSelection.toUpperCase()));
+// get player input
+
+let userSelect = prompt("Valid options : Rock, Paper and Scissors. Enter a value to play.");
+
+userSelect = userSelect.toUpperCase();
+
+console.log(userSelect);
+
+switch (userSelect){
+
+    case 'ROCK':
+    case 'PAPER':
+    case 'SCISSORS':
+        playerSelection = userSelect;
+        console.log(playRound(playerSelection, computerSelection));
+        break;
+
+    default:
+        console.log("Invlid Entry")
+}
+
+
 
 function playRound(playerChoice, computerChoice){
 // Decide the winner based on their selections
@@ -32,7 +53,7 @@ function getComputerChoice(){
     // generate randomly between 1, 2 & 3
     // where 1 - Rock, 2 - Paper, and 3 - Scissors
     let choice;
-    let choiceId = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+    let choiceId = Math.floor(Math.random() * 3 ) + 1;
 
     switch(choiceId){
 
