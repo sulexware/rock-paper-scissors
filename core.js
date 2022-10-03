@@ -3,48 +3,84 @@
 // console.log(getComputerChoice());
 
 let playerSelection;
+let playerScore = 0;
+let computerScore = 0;
+let userSelect;
 const computerSelection = getComputerChoice().toUpperCase();
 
-// get player input
+// Start loop
 
-let userSelect = prompt("Valid options : Rock, Paper and Scissors. Enter a value to play.");
+for(let i = 1; i <= 5; i++)
+{
 
-userSelect = userSelect.toUpperCase();
+    // get player input
 
-console.log(userSelect);
+    userSelect = prompt("Valid options : Rock, Paper and Scissors. Enter a value to play.");
+    
+    userSelect = userSelect.toUpperCase();
+    
+    console.log(userSelect);
+    
+    
+    switch (userSelect){
+    
+        case 'ROCK':
+        case 'PAPER':
+        case 'SCISSORS':
+                game();
+                break;
+    
+        default:
+            console.log("Invlid Entry")
+    }
 
-switch (userSelect){
+}
 
-    case 'ROCK':
-    case 'PAPER':
-    case 'SCISSORS':
-        playerSelection = userSelect;
-        console.log(playRound(playerSelection, computerSelection));
-        break;
+// Report Game Status
 
-    default:
-        console.log("Invlid Entry")
+if (playerScore > computerScore){
+    console.log("Player is the overall Winner")
+}else{
+    console.log("Computer is the overall Winner")
 }
 
 
+function game(){
+    playerSelection = userSelect;
+    console.log(playRound(playerSelection, computerSelection));
+}
 
 function playRound(playerChoice, computerChoice){
 // Decide the winner based on their selections
 
     if(playerChoice === computerChoice){
+        playerScore += 1;
+        computerScore += 1;
         return "It's a tie, you both choose " + playerChoice;
     }else if (playerChoice === 'ROCK' && computerChoice === 'SCISSORS'){
+        playerScore += 1;
+        computerScore += 0;
         return "Player win, Computer Loose!";
     }else if (playerChoice === 'PAPER' && computerChoice === 'ROCK'){
+        playerScore += 1;
+        computerScore += 0;
         return "Player win, Computer Loose!";
     }else if (playerChoice === 'SCISSORS' && computerChoice === 'PAPER'){
+        playerScore += 1;
+        computerScore += 0;
         return "Player win, Computer Loose!";
     }else if (computerChoice === 'ROCK' && playerChoice === 'SCISSORS'){
-        return "Player win, Computer Loose!";
+        playerScore += 0;
+        computerScore += 1;
+        return "Computer win, Player Loose!";
     }else if (computerChoice === 'PAPER' && playerChoice === 'ROCK'){
-        return "Player win, Computer Loose!";
+        playerScore += 0;
+        computerScore += 1;
+        return "Computer win, Player Loose!";
     }else if (computerChoice === 'SCISSORS' && playerChoice === 'PAPER'){
-        return "Player win, Computer Loose!";
+        playerScore += 0;
+        computerScore += 1;
+        return "Computer win, Player Loose!";
     }
 
 }
