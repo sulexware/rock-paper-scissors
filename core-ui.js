@@ -2,54 +2,64 @@
 
 // This file implements the User Interface 
 
-// console.log(getComputerChoice());
-
 let playerSelection;
+let computerSelection;
 let playerScore = 0;
 let computerScore = 0;
 let userSelect;
-const computerSelection = getComputerChoice().toUpperCase();
+let myCount = 0;
 
-// Start loop
+const displayScore = document.querySelector('#status');
 
-for(let i = 1; i <= 5; i++)
-{
+const buttons = document.querySelectorAll('button');
 
-    // get player input
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
 
-    userSelect = prompt("Valid options : Rock, Paper and Scissors. Enter a value to play.");
-    
-    userSelect = userSelect.toUpperCase();
-    
-    console.log(userSelect);
-    
-    
-    switch (userSelect){
-    
-        case 'ROCK':
-        case 'PAPER':
-        case 'SCISSORS':
-                game();
-                break;
-    
-        default:
-            console.log("Invlid Entry")
-    }
+    // and for each one we add a 'click' listener
+    button.addEventListener('click', () => {
+      
+    // collect name of selected button
+      userSelect = button.id.toUpperCase();
 
-}
+      // get computer selection
+      computerSelection = getComputerChoice().toUpperCase();
 
-// Report Game Status
+      // increament count variable
+      myCount++;
 
-if (playerScore > computerScore){
-    console.log("Player is the overall Winner")
-}else{
-    console.log("Computer is the overall Winner")
-}
+      // play game
+      game();
+
+      // Check number of games to report final score
+      if(myCount === 5){
+
+        if (playerScore > computerScore){
+
+            displayScore.textContent += ", Final Round, Player is the overall Winner";
+
+        }else{
+
+            displayScore.textContent +=", Final Round, Computer is the overall Winner";
+        }
+
+        // reset counter
+        myCount = 0;
+        
+      }
+
+
+    });
+  });
 
 
 function game(){
+
     playerSelection = userSelect;
-    console.log(playRound(playerSelection, computerSelection));
+
+    displayScore.textContent =`Round ${myCount}, ` + playRound(playerSelection, computerSelection);
+
+  //  console.log(`Round ${myCount}, ` + playRound(playerSelection, computerSelection));
 }
 
 function playRound(playerChoice, computerChoice){
